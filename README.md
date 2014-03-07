@@ -1,4 +1,4 @@
 Python-Scripts
 ==============
 
-A directory of hand python scripts.
+A directory of handy python scripts.

@@ -4,8 +4,8 @@ from bs4 import BeautifulSoup
 import requests
 
 #url = raw_input("Enter a website to extract the URL's from: ")
-#r = requests.get('http://www.cs.iastate.edu/~cs227/assignments/mini1/doc/mini1/TV.html')
-r = requests.get('http://www.cs.iastate.edu/~cs227/assignments/mini3/doc/mini3/DNAStrand.html')
+#r = requests.get('http://www.cs.iastate.edu/~cs227/assignments/hw2/doc/hw2/Game.html')
+r = requests.get('http://www.cs.iastate.edu/~cs227/assignments/hw2/doc/hw2/PhraseSelector.html')
 
 data = r.text
 soup = BeautifulSoup(data)
@@ -45,7 +45,7 @@ if instances is not None:
             line = (" ".join(cols.text.split()))
             if first:
                 line = line.replace('java.lang.String','String')
-                var += '\tpublic ' + line + ' '
+                var += '\tpublic ' + line + ';'
                 first = False
             else:
                 line = line.replace('java.lang.String','String')

@@ -1,0 +1,60 @@
+
+
+class SodaMachine:
+	
+	def __init__(self):
+		pass
+
+
+	def fill(self, soda_cup, amount, soda_type):
+		if soda_cup.lidded:
+			return -1
+		soda_cup.amount += amount
+		soda_cup.soda_type = soda_type
+
+
+class SodaCup:
+	_soda_limit = 10
+	amount = 0
+	lidded = False
+	soda_type = None
+
+	def __init__(self, soda_limit ):
+		self._soda_limit = soda_limit
+
+	def __str__(self):
+		return str(self.amount)+ ' ml of ' + str(self.soda_type)
+
+	def is_full(self):
+		return self._soda_limit == self.amount
+
+
+	def is_overfilled(self):
+		return self._soda_limit < self.amount
+
+
+	def place_lid(self):
+		if self.lidded == True:
+			return -1
+		else:
+			self.lidded = True
+
+
+	def remove_lid(self):
+		if self.lidded == False:
+			return -1
+		else:
+			self.lidded = False
+			
+
+cup1 = SodaCup(20)
+machine = SodaMachine()
+
+cup1.place_lid()
+machine.fill(cup1, 20, 'Dr Pepper')
+print cup1
+cup1.remove_lid()
+
+machine.fill(cup1, 35, 'Coke')
+print cup1
+print cup1.is_overfilled()

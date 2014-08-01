@@ -1,0 +1,85 @@
+# Streetlamp simulator... I don't know why I made this
+# Enjoy the simplicity of being a streetlamp
+# 
+# licensed under the GNU GPL. Not to be distributed for monetary gain.
+
+class Lamppost:
+	def __init__(self, initial_state = False):
+		self.state = initial_state
+		self.color = (1,1,1)
+
+	def __str__(self):
+		if self.state:
+			return "[On] "+str(self.color)
+		else:
+			return "[Off] "+str(self.color)
+
+	def toggle(self):
+		self.state  = not self.state
+
+	def set_color(sefl, color_tuple):
+		self.color = color_tuple
+
+class Command:
+	def execute(self, object):
+		pass
+
+class ToggleCommand(Command):
+	def execute(self, object):
+		object.toggle()
+
+
+class OnCommand(Command):
+	def execute(self, object):
+		if not object.state:
+			object.toggle()
+
+class Street:
+	def __init__(self, number_of_lamps = 0, initial_state = False):
+		self.lamps = []
+		for x in range(number_of_lamps):
+			self.lamps.append(Lamppost(initial_state))
+
+		self.toggleCMD = ToggleCommand()
+		self.onCMD = OnCommand()
+
+	def __str__(self):
+		string = ''
+		for lamp in self.lamps:
+			string += (str(lamp)+'\n')
+		return string
+
+	def toggle_lamp(self, lamp_index):
+		self.toggleCMD.execute(self.lamps[lamp_index])
+
+	def toggle_all(self):
+		for lamp in self.lamps:
+			self.toggleCMD.execute(lamp)
+
+	def all_on(self):
+		for lamp in self.lamps:
+			self.onCMD.execute(lamp)
+
+	def all_off(self):
+		self.all_on()
+		self.toggle_all()
+
+
+street = Street(10)
+print street
+
+street.toggle_lamp(5)
+
+print street
+
+street.toggle_all()
+
+print street
+
+street.all_on()
+	
+print street 
+
+street.all_off()
+
+print street
